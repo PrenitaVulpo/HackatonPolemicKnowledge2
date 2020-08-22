@@ -19,7 +19,7 @@ function letterSwap(phrase) {
         if (regex.test(char)){
             result.push(char);
         } else {
-            result.push(letterTable.indexOf(char));
+            result.push(letterTable.indexOf(char)+1);
         }
     }
     res = result.join("");
@@ -32,4 +32,4 @@ function start() {
     console.log("frase com as letras substituídas: "+output);
 }
 
-start()
+start();
