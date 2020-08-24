@@ -49,7 +49,7 @@ function validador(num) {
             if (nume[i] > 9) nume[i] = nume[i]- 9;
         }
     } else {
-        for (i = 0;i<nume.length;i+2){
+        for (i = 0;i<nume.length;i+=2){
             nume[i] = nume[i]*2;
             if (nume[i] > 9) nume[i] = nume[i]- 9;
         }
