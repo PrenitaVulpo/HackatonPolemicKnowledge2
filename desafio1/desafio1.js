@@ -11,7 +11,7 @@ https://gist.github.com/erikhenrique/5931368 e esta
 
 const rl = require('readline-sync');
 
-const singleDigits = [3,4,5,6]  ;
+const singleDigits = [3,4,5,6];
 const singleDigitsBand = ['American Express', 'Visa', 'Mastercard', 'Discover'];
 const doubleDigits = [36,38,64,65,50,35,38,60];
 const doubleDigitsBand = ['Diners','Diners','Discover','Discover','Aura','JBC','Hipercard','Hipercard'];
@@ -21,31 +21,34 @@ const quadrupleDigits = [5067,4576,4011,6011];
 const quadrupleDigitsBand = ['Elo','Elo','Elo','Discover'];
 const hextupleDigits = [636368, 636369, 438935, 504175, 451416, 636297,506699];
 const hextupleDigitsBand = 'Elo';
-const regex = /[0-9]/g;
-const numLenght = [13,14,15,16,19];
+const regex = /[^0-9]/gm;
+const numLength = [13,14,15,16,19];
 
-
+//5067775513063297
 function checkInput(num){
     nume = num.toString();
-
-    if (regex.test(parseInt(nume)) === true){
+    bool = regex.test(nume);
+    if (bool === true && numLength.indexOf(nume.split("").length) != -1){
         console.log("Entrada Inválida");
         start();
     } else {
-        console.log(nume.split("").length)
-        valid = validador(nume);
+        nume = nume.split("");
+        nume = nume.map(Number);
+        //console.log(nume)
         band = bandeiraReturn(nume);
-        if (band != '.') band = ", bandeira"+band+".";
-        retorno = "Cartão "+valid+band;
+        valid = validador(nume);
+        if (band != '') band = ", bandeira "+band;
+        retorno = "Cartão "+band;
         return retorno
     }
 }
-
+//30193262948844
 function validador(numi) {
-    nume = numi.split(",");
+    nume = numi.slice(0,-1);
+    console.log(nume)
     soma = 0;
     if (nume.length%2 == 0){
-        for (i = 1;i<nume.length;i+2){
+        for (i = 1;i<nume.length;i+=2){
             nume[i] = nume[i]*2;
             if (nume[i] > 9) nume[i] = nume[i]- 9;
         }
@@ -58,7 +61,10 @@ function validador(numi) {
     for (i = 0;i<nume.length;i++){
         soma = soma+nume[i]
     }
-    if (soma*9%10 == nume.lastIndex) {
+    soma = soma*9;
+    console.log(soma%10);
+    //30373136523516
+    if (soma%10 == numi[numi.indexOf(numi.lenght-1)]) {
         return 'válido'
     } else {
         return 'inválido'
@@ -66,13 +72,24 @@ function validador(numi) {
 }
 
 function bandeiraReturn(num) {
-    nume = num.split("");
-    band = '.';
-    if (singleDigits.indexOf(nume[0])) band = singleDigitsBand[nume[0]]+'.';
-    if (doubleDigits.indexOf(nume[0])) band = doubleDigitsBand[nume[0]]+'.';
-    if (tripleDigits.indexOf(nume[0])) band = tripleDigitsBand[nume[0]]+'.';
-    if (quadrupleDigits.indexOf(nume[0])) band = quadrupleDigitsBand[nume[0]]+'.';
-    if (hextupleDigits.indexOf(nume[0])) band = hextupleDigitsBand[nume[0]]+'.';
+    nume = num;
+    band = '';
+    pivot = 0;
+    if (singleDigits.indexOf(nume[0]) != -1) band = singleDigitsBand[singleDigits.indexOf(nume[0])];
+    pivot = parseInt(nume.slice(0,2).join(""));
+    if (doubleDigits.indexOf(pivot) != -1){
+        band = doubleDigitsBand[doubleDigits.indexOf(pivot)]};
+    pivot = parseInt(nume.slice(0,3).join(""));
+    if (tripleDigits.indexOf(pivot) != -1){
+        band = tripleDigitsBand[tripleDigits.indexOf(pivot)]};
+    pivot = parseInt(nume.slice(0,4).join(""));
+    //console.log(pivot);
+    if (quadrupleDigits.indexOf(pivot) != -1){
+        band = quadrupleDigitsBand[quadrupleDigits.indexOf(pivot)]};
+    pivot = parseInt(nume.slice(0,6).join(""));
+    if (hextupleDigits.indexOf(pivot) != -1) {
+        band = hextupleDigitsBand ;
+    }
 
     return band
 }
