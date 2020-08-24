@@ -21,17 +21,18 @@ const quadrupleDigits = [5067,4576,4011,6011];
 const quadrupleDigitsBand = ['Elo','Elo','Elo','Discover'];
 const hextupleDigits = [636368, 636369, 438935, 504175, 451416, 636297,506699];
 const hextupleDigitsBand = 'Elo';
-const regex = /^[0-9]/g;
+const regex = /[0-9]/g;
 const numLenght = [13,14,15,16,19];
 
 
 function checkInput(num){
     nume = num.toString();
-    if (regex.test(nume) === true &&
-        nume.split(",").lenght == 16){
+
+    if (regex.test(parseInt(nume)) === true){
         console.log("Entrada Inválida");
         start();
     } else {
+        console.log(nume.split("").length)
         valid = validador(nume);
         band = bandeiraReturn(nume);
         if (band != '.') band = ", bandeira"+band+".";
@@ -40,8 +41,8 @@ function checkInput(num){
     }
 }
 
-function validador(num) {
-    nume = num.split(",");
+function validador(numi) {
+    nume = numi.split(",");
     soma = 0;
     if (nume.length%2 == 0){
         for (i = 1;i<nume.length;i+2){
@@ -55,9 +56,9 @@ function validador(num) {
         }
     }
     for (i = 0;i<nume.length;i++){
-        soma = soma+num[i]
+        soma = soma+nume[i]
     }
-    if (soma*9%10 == num.lastIndex) {
+    if (soma*9%10 == nume.lastIndex) {
         return 'válido'
     } else {
         return 'inválido'
@@ -65,13 +66,13 @@ function validador(num) {
 }
 
 function bandeiraReturn(num) {
-    num = num.split(",");
+    nume = num.split("");
     band = '.';
-    if (singleDigits.indexOf(num[0])) band = singleDigitsBand[num[0]]+'.';
-    if (doubleDigits.indexOf(num[0])) band = doubleDigitsBand[num[0]]+'.';
-    if (tripleDigits.indexOf(num[0])) band = tripleDigitsBand[num[0]]+'.';
-    if (quadrupleDigits.indexOf(num[0])) band = quadrupleDigitsBand[num[0]]+'.';
-    if (hextupleDigits.indexOf(num[0])) band = hextupleDigitsBand[num[0]]+'.';
+    if (singleDigits.indexOf(nume[0])) band = singleDigitsBand[nume[0]]+'.';
+    if (doubleDigits.indexOf(nume[0])) band = doubleDigitsBand[nume[0]]+'.';
+    if (tripleDigits.indexOf(nume[0])) band = tripleDigitsBand[nume[0]]+'.';
+    if (quadrupleDigits.indexOf(nume[0])) band = quadrupleDigitsBand[nume[0]]+'.';
+    if (hextupleDigits.indexOf(nume[0])) band = hextupleDigitsBand[nume[0]]+'.';
 
     return band
 }
