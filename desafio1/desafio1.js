@@ -44,8 +44,11 @@ function checkInput(num){
 }
 //30193262948844
 function validador(numi) {
-    nume = numi.slice(0,-1);
-    console.log(nume)
+    nume = numi;
+    //ver = numi.slice(0,-1);
+    ver = numi.pop();
+    nume = nume.reverse();
+    console.log(numi);
     soma = 0;
     if (nume.length%2 == 0){
         for (i = 1;i<nume.length;i+=2){
@@ -61,7 +64,7 @@ function validador(numi) {
     for (i = 0;i<nume.length;i++){
         soma = soma+nume[i]
     }
-    soma = soma*9;
+    console.log(soma)
     console.log(soma%10);
     //30373136523516
     if (soma%10 == numi[numi.indexOf(numi.lenght-1)]) {

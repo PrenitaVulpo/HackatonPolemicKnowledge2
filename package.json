@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/PrenitaVulpo/HackatonPolemicKnowledge2#readme",
   "dependencies": {
-    "readline-sync": "^1.4.10"
+    "readline-sync": "^1.4.10",
+    "request": "^2.88.2"
   }
 }
