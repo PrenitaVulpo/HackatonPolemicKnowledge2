@@ -38,7 +38,7 @@ function checkInput(num){
         band = bandeiraReturn(nume);
         valid = validador(nume);
         if (band != '') band = ", bandeira "+band;
-        retorno = "Cartão "+band;
+        retorno = "Cartão "+valid+band;
         return retorno
     }
 }
@@ -46,8 +46,8 @@ function checkInput(num){
 function validador(numi) {
     nume = numi;
     //ver = numi.slice(0,-1);
-    ver = numi.pop();
-    nume = nume.reverse();
+    ver = nume.pop();
+    //nume = nume.reverse();
     console.log(numi);
     soma = 0;
     if (nume.length%2 == 0){
@@ -64,10 +64,10 @@ function validador(numi) {
     for (i = 0;i<nume.length;i++){
         soma = soma+nume[i]
     }
-    console.log(soma)
-    console.log(soma%10);
+    console.log("soma: "+soma);
+    console.log("mod da soma: "+soma%10);
     //30373136523516
-    if (soma%10 == numi[numi.indexOf(numi.lenght-1)]) {
+    if (10-(soma%10) == ver) {
         return 'válido'
     } else {
         return 'inválido'

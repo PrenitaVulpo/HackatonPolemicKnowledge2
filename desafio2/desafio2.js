@@ -58,7 +58,7 @@ function start() {
         console.log("não será possível participar");
     } else{
         choices = filtering(danifEntry);
-        console.log(choices);
+        console.log("Drones disponíveis: "+choices);
         limit = choices.length;
         for (i = 0;i<nesce; i++){
             n = getRandomInt(choices.length);
